@@ -11,7 +11,7 @@
   <h3 align="center">FDA Noncompliance Predictor</h3>
 
   <p align="center">
-    Logistic regression model that predicts noncompliance to 0.99 testing precision. Deployed <a href="https://fda-food-violation-score-predictor-4wyodp6kbgjfna8dx4pxts.streamlit.app/">here</a>.
+    Logistic regression model that predicts noncompliance to 0.99 testing precision. Deployed <a href="https://denq-fda-food-violation-score-predictor.streamlit.app/">here</a>.
     <br>
     <br>
     <a href="https://github.com/cdenq/">GitHub Home</a>
@@ -98,7 +98,7 @@ Depending on business needs, this model can be easily retrained to optimize for 
 
 <a name="started-live"></a>
 ## Live Link
-You can visit the deployed Streamlit app [here](https://fda-food-violation-score-predictor-4wyodp6kbgjfna8dx4pxts.streamlit.app/).
+You can visit the deployed Streamlit app [here](https://denq-fda-food-violation-score-predictor.streamlit.app/).
 
 <a name="started-setup"></a>
 ## Setup

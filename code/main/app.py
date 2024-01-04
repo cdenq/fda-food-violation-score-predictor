@@ -1,8 +1,8 @@
 #----------------------------------------------------
 # Imports
 #----------------------------------------------------
-from ..modules import imports
-from ..modules import helper
+from modules import imports
+from modules import helper
 
 #----------------------------------------------------
 # Helper Functions
