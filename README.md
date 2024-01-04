@@ -74,7 +74,7 @@
 <!-- DEMO -->
 <a name="live-demo"></a>
 # Live Demo
-<img src="repo_assets/fda_demo.gif">
+<img src="repo_assets/demo.gif">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -205,7 +205,7 @@ Outliers and multicollinearity were checked, as well, which in cases where viola
 
 For example, the graph below shows the presence of outliers in the `inspection_duration` variable. This type of EDA prompted the use of robust scaling, which is effective at reducing outlier impact without directly removing them from the dataset.
 
-<img src="outputs/eda/boxplot_inspection_duration.png">
+<img src="outputs/eda_outputs/boxplot_inspection_duration.png">
 
 Specific details are found in the `eda.ipynb` development file, located in `code/dev`.
 
@@ -220,8 +220,8 @@ One benefit of the logistic regression model was its compute speed, and that lev
 
 The performance is summarized below.
 
-<img src="outputs/model/bar_comparisons_model_comparisons.png">
-<img src="outputs/model/total_model_performance.png">
+<img src="outputs/model_outputs/bar_comparisons_model_comparisons.png">
+<img src="outputs/model_outputs/total_model_performance.png">
 
 From validation evaluation, the MinMax scalar-variant of the logistic model ended up performing the best on precision but slighty worse in all other metrics. Because precision was our target metric, the MinMax model was selected for testing evaluation. Worth noting, there was little difference in the effect of Standard scaling versus Robust scaling in terms of model performance.
 
@@ -234,8 +234,8 @@ Specific details—including insights from the coefficient tables, confusion mat
 
 Deploying the MinMax model onto our testing data, leads to the following results. Note: the blue and orange bars below represent the *same model*, just evaluated with different datasets.
 
-<img src="outputs/model/bar_comparisons_val_vs._test_comparison.png">
-<img src="outputs/model/final_model_performance.png">
+<img src="outputs/model_outputs/bar_comparisons_val_vs._test_comparison.png">
+<img src="outputs/model_outputs/final_model_performance.png">
 
 As shown in the graph above, the MinMax model scored extremely well in precision. The model also scored slightly lower in all the other metrics, which suggests that the model was overfit during the training phase.
 
