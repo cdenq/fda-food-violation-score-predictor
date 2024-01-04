@@ -11,7 +11,7 @@
   <h3 align="center">FDA Noncompliance Predictor</h3>
 
   <p align="center">
-    Logistic regression model that predicts noncompliance to 0.99 testing precision.
+    Logistic regression model that predicts noncompliance to 0.99 testing precision. Deployed <a href="https://fda-food-violation-score-predictor-4wyodp6kbgjfna8dx4pxts.streamlit.app/">here</a>.
     <br>
     <br>
     <a href="https://github.com/cdenq/">GitHub Home</a>
@@ -98,7 +98,7 @@ Depending on business needs, this model can be easily retrained to optimize for 
 
 <a name="started-live"></a>
 ## Live Link
-You can visit the deployed Streamlit app [here]().
+You can visit the deployed Streamlit app [here](https://fda-food-violation-score-predictor-4wyodp6kbgjfna8dx4pxts.streamlit.app/).
 
 <a name="started-setup"></a>
 ## Setup
@@ -122,7 +122,7 @@ cd fda-food-violation-score-predictor/code/main
 streamlit run app.py
 ```
 
-NOTE: The raw data is not pushed with this repo. Please contact me for more information if you wish to deploy this model locally.
+NOTE: The raw data is not pushed with this repo. While you are able to deploy this app locally, you will not be able to re-run `eda.ipynb` or `model.ipynb` due to missing data sources. Please contact me for more information if you wish to rerun these files.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
