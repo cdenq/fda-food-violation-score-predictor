@@ -118,11 +118,11 @@ pip install --upgrade dataframe_image # to fix Chrome update issues
 
 Navigate to streamlit folder and run app
 ```sh
-cd fda-food-violation-score-predictor/code/main
+cd fda-food-violation-score-predictor
 streamlit run app.py
 ```
 
-NOTE: The raw data is not pushed with this repo. While you are able to deploy this app locally, you will not be able to re-run `eda.ipynb` or `model.ipynb` due to missing data sources. Please contact me for more information if you wish to rerun these files.
+NOTE: The raw data is not pushed with this repo. While you are able to deploy this app locally, you will not be able to re-run `eda.ipynb` or `model.ipynb` due to missing data sources. Please <a href="#contact">contact me</a> for more information if you wish to rerun these files.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -135,7 +135,7 @@ fda-food-violation-score-predictor
 │   ├── prepped             # contains the prepped data
 │   │   └── *.csv
 │   └── raw                 # contains the raw data
-│       │                   # note: not all raw data is uploaded in this repo
+│       │                   # note: the raw data is uploaded in this repo
 │       └── *.csv
 ├── dev
 │   ├── eda.ipynb           # code used for EDA
@@ -172,7 +172,7 @@ fda-food-violation-score-predictor
 <a name="about-ps"></a>
 ## Problem Statement
 
-The FDA is interested in efficiently allocating resources to food inspection cycles. Certain restaurants are more likely to violate health regulations than others, and thus, identifying such restaurants could help save time and money. Given raw data, this project aims to create a model to accurately predict whether a restaurant will receive a "serious violation score" (score of 10 or above), or **noncompliance**.
+The FDA is interested in efficiently allocating resources to food inspection cycles. Certain restaurants are more likely to violate health regulations than others, and thus, identifying such restaurants could help save time and money in the form of remediary or preemptive measures. Given raw data, this project aims to create a model to accurately predict whether a restaurant will receive a "serious violation score" (score of 10 or above), or **noncompliance**.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -192,7 +192,7 @@ The FDA is interested in efficiently allocating resources to food inspection cyc
 <a name="process-setup"></a>
 ## Data Collection and Cleaning
 
-Data is provided by the client. The files were checked for any formatting or value errors, but in general, they were already clean. The only major task was type-parsing, as the data types for certain fields were presented as strings but had to be parsed as lists and date-times.
+Data is provided by the client. The files were checked for any formatting or value errors. One major task was type-parsing, as the data types for certain fields were presented as strings but had to be parsed as lists and date-times.
 
 Feature engineering was heavily used in this process to augment the dataset. Here are the list of features that were extracted from the raw data:
 - inspection duration in days
@@ -203,24 +203,22 @@ Feature engineering was heavily used in this process to augment the dataset. Her
 - whether the cuisine was ethnic (client paramaters)
 - whether the cuisine was asian (client paramaters)
 
-Specific details are found in the `eda.ipynb` development file, located in `code/dev`. See <a href="#started-directory">Directory</a> for how to locate this file.
-
-NOTE: The raw data files were not pushed to this repo for security reasons.
+Specific details are found in the `eda.ipynb` development file, located in `dev/`. See <a href="#started-directory">Directory</a> for how to locate this file.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <a name="process-eda"></a>
 ## EDA
 
-At a high level, EDA was performed to check the data quality, repair any data deficiences, feature engineer new data, and properly format it for modeling.
+At a high level, EDA was performed to check the data quality, understand data shape, and properly inform potential feature engineering.
 
-Outliers and multicollinearity were checked, as well, which in cases where violated, prompted specialized scaling and data engineering. 
+Outliers and multicollinearity were also checked, and in cases where violated, prompted tune-ups in the form of scaling, dropping, and combining data. 
 
 For example, the graph below shows the presence of outliers in the `inspection_duration` variable. This type of EDA prompted the use of robust scaling, which is effective at reducing outlier impact without directly removing them from the dataset.
 
 <img src="outputs/eda_outputs/boxplot_inspection_duration.png">
 
-Specific details are found in the `eda.ipynb` development file, located in `code/dev`.
+Specific details are found in the `eda.ipynb` development file, located in `dev/`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -238,21 +236,21 @@ The performance is summarized below.
 
 From validation evaluation, the MinMax scalar-variant of the logistic model ended up performing the best on precision but slighty worse in all other metrics. Because precision was our target metric, the MinMax model was selected for testing evaluation. Worth noting, there was little difference in the effect of Standard scaling versus Robust scaling in terms of model performance.
 
-Specific details—including insights from the coefficient tables, confusion matrices, etc.—are found in the `model.ipynb` development file, located in `code/dev`.
+Specific details—including insights from the coefficient tables, confusion matrices, etc.—are found in the `model.ipynb` development file, located in `dev/`.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <a name="process-eval"></a>
 ## Evaluation (on Testing Data)
 
-Deploying the MinMax model onto our testing data, leads to the following results. Note: the blue and orange bars below represent the *same model*, just evaluated with different datasets.
+Deploying the MinMax model onto our testing data, leads to the following results. Note: the blue and orange bars below represent the same model, just evaluated with the validation and testing data respectively.
 
 <img src="outputs/model_outputs/bar_comparisons_val_vs._test_comparison.png">
 <img src="outputs/model_outputs/final_model_performance.png">
 
 As shown in the graph above, the MinMax model scored extremely well in precision. The model also scored slightly lower in all the other metrics, which suggests that the model was overfit during the training phase.
 
-In general, this MinMax model is a great overall starting point for predicting noncompliance, as it correctly predicts noncompliance 98% of the time and overall can differentiate between noncompliant and compliant cases 82% of the time.
+In general, this MinMax model is a great overall starting point for predicting noncompliance, as it correctly predicts noncompliance 98% of the time (precision score) and overall can differentiate between noncompliant and compliant cases 82% of the time (AUC score). 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -267,9 +265,9 @@ The logistic model serves as a signficiant improvement over the baseline format.
 
 For this reason, this model would be especially effective in informing policy or noncompliance actions. 
 
-One method of deployment would be to use this model in an ensemble system, specifically as a double-checker for a another, more well-balanced model (SVM, random forest, DL NN, etc.). Given the regulatory context of this project, a false positive prediction that erronously penalizes a compliant restaurant for noncompliance would be disastrous. By having this logistic regression model quality-checking another model's prediction, we can drastically reduce the number of false positives.
+One method of deployment would be to use this model in an **ensemble system, specifically as a double-checker for a another, more well-balanced model** (SVM, random forest, DL NN, etc.). Given the regulatory context of this project, a false positive prediction that erronously penalizes a compliant restaurant for noncompliance would be disastrous. By having this logistic regression model quality-checking another model's prediction, we can drastically reduce the number of false positives.
 
-Another method of deployment would be to use this model "as-is". While not perfect, this model poses a general strong performance already (82% correct at differentiating between compliance and noncompliance), which could be sufficient for certain business contexts. Depending on stakeholders' needs, this model can also be quickly retrained to prioritize other metrics, like the F1-score, if a more holistic/well-rounded model is prefered over a precision-optimized model.
+Another method of deployment would be to use this model "as-is". While not perfect, this model significantly outperforms a naive guesser, which could be sufficient for certain business contexts. Depending on stakeholders' needs, this model can also be quickly retrained to prioritize other metrics, like the F1-score, if a more holistic/well-rounded model is prefered over a precision-optimized model.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -303,15 +301,15 @@ This information might be obtained from health inspection records, business regi
 <a name="results-note"></a>
 ### Ending Note about AI in Social Contexts
 
-It is important to not over-rely on model predictions. An often overlooked problem with models is that we assume the ingested dataset to be perfect when this is often not the case. The dataset itself might inadvertently bias against certain types of establishments because it doesn't collect all the relevant data, potentially was collected under non-normal circumstances, or the data contains systemic bias that the model then further perpetuates. This could again lead to unfair targeting and reputational concerns for certain businesses.
+It is important to not over-rely on ML predictions, as there are potentially overlooked limitations and biases in the datasets used to train them. For example, datasets may not capture all relevant data, may be collected under atypical conditions, or contain inherent biases, leading to skewed model predictions. This can result in unjust and costly outcomes, especially in the regulatory space.
 
-- E.g. High violation rates may occur due to a negligent local supplier that supplies meat to nearby restaurants (which all happen to be asian). Because tracking the source provider of meat isn't a data point, it may be the case that the model conflates being asian with the badly maintained food quality (which again, is the fault of the supplier, not the restaurant), which then results in the model predicting that universally, asian restaurants are more likelihood at risk of violation based on the strong correlation in this local case.
+- Example: A model might wrongly associate a particular ethnicity of restaurants with poor food quality due to an external factor like a negligent local supplier (which is not captured in the dataset). This could lead to unfair predictions about these establishments.
 
-- E.g. Inspections happened during a time when the neighboring establishment had pests, and that ended up bleeding over to the restaurant under scrutiny. Thus, this non-normal circumstance would effectively corrupt the prediction for the restaurant.
+- Example: Data collected during unusual circumstances, like pest infestations in neighboring establishments, can inaccurately influence the model's predictions for a restaurant.
 
-- E.g. Historically, inspectors were more likely to downrate minority-owned restaurants, leading to a noticeable historical pattern in the dataset. The model would ingest this pattern and predict that minority-owned restaurants were more likely to have more violations in the future, leading to more visits to the establishment that are expecting to give poor scores, which then leads to more minority-owned restaurants getting violations, etc. This cycle would perpetuate the systemic bias against minorities.
+- Example: Historical biases in data, such as inspectors disproportionately downrating minority-owned restaurants, can perpetuate systemic bias in model predictions, creating a cycle of unjustified scrutiny and violations for these businesses.
 
-**In general, while models may provide stronger predictive powers that lead to better efficiency, we must always ensure that the models are developed transparently and ethically to ensure that the results do not come at the cost of others. Careful consideration of the results (e.g. placing them in social contexts to see if they make sense), continued iterative improvements to modeling, and diligent scrutiny of the provided dataset are critical.**
+**In general, while models may provide stronger predictive powers that lead to better efficiency, we must always ensure that the models are developed transparently and ethically to ensure that the results do not come at the cost of others. Careful consideration of the results, continued iterative improvements to modeling, and diligent scrutiny of the provided dataset are critical.**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
