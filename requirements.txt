@@ -8,3 +8,4 @@ seaborn
 scikit-learn
 streamlit
 dataframe_image
+IPython
