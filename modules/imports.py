@@ -41,11 +41,15 @@ CHARS_TO_REMOVE = ["[", "]", "'", " ", "/", "-", "(", ")", "&"]
 #----------------------------------------------------
 # FILEPATH Variables
 #----------------------------------------------------
-DEV_PATH_TO_EDA = "../../outputs/eda"
-DEV_PATH_TO_MODEL = "../../outputs/model"
-DEV_PATH_TO_RAW_DATA = "../../data/raw"
-DEV_PATH_TO_PREPPED_DATA = "../../data/prepped"
-DEV_PATH_TO_SAVED_MODELS = "../main/saved_models/"
+DEV_PATH_TO_EDA = "../outputs/eda_outputs"
+DEV_PATH_TO_MODEL = "../outputs/model_outputs"
+DEV_PATH_TO_SAVED_MODELS = "../outputs/saved_models"
+DEV_PATH_TO_RAW_DATA = "../data/raw"
+DEV_PATH_TO_PREPPED_DATA = "../data/prepped"
+
+APP_PATH_TO_SAVED_MODELS = "outputs/saved_models"
+APP_PATH_TO_RAW_DATA = "data/raw"
+APP_PATH_TO_PREPPED_DATA = "data/prepped"
 
 #----------------------------------------------------
 # Default Variables

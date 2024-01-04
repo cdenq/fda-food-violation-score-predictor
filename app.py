@@ -14,7 +14,7 @@ def extract_cuisine_data() -> tuple:
     Returns -> tuple
         Returns a tuple containing the unique cuisine labels and the mapper
     """
-    filepath = f"{imports.DEV_PATH_TO_RAW_DATA}/cuisines.csv"
+    filepath = f"{imports.APP_PATH_TO_RAW_DATA}/cuisines.csv"
     cuis_labels_df = imports.pd.read_csv(filepath)
     cuis_labels_unique = cuis_labels_df["x"].unique()
     mapper = {}
@@ -172,9 +172,9 @@ def main():
     Main function to run the Streamlit app.
     """
     # Load model & preprocessor
-    filepath = f"saved_models/logistic_regression_final.pkl"
+    filepath = f"{imports.APP_PATH_TO_SAVED_MODELS}/logistic_regression_final.pkl"
     model = imports.joblib.load(filepath)
-    filepath = f"saved_models/preprocessor_logistic_regression_minmax.pkl"
+    filepath = f"{imports.APP_PATH_TO_SAVED_MODELS}/preprocessor_logistic_regression_minmax.pkl"
     preprocessor = imports.joblib.load(filepath)
 
     # Set up the title and description
