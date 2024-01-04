@@ -163,3 +163,7 @@ cython_debug/
 data/raw/food_violations_seattle.csv
 data/prepped/cleaned_data.csv
 data/prepped/cleaned_featured_data.csv
+
+# Settings
+.vscode
+.devcontainer
