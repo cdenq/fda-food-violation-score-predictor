@@ -129,26 +129,39 @@ NOTE: The raw data is not pushed with this repo. While you are able to deploy th
 <a name="started-directory"></a>
 ## Directory
 
-- `code/`
-  - `dev/`
-    - `eda.ipynb` contains the code used for EDA
-    - `model.ipynb` contains the code used for modeling
-  - `main/`
-    - `app.py` contains the code used for the front-end app
-    - `logistic_regression_model.pkl` contains the saved model
-    - `model.ipynb` contains the code used for back-end modeling
-  - `modules/`
-    - `eda.py` contains EDA visualization functions
-    - `evaluate.py` contains model evaluation functions
-    - `helper.py` contains general helper functions
-    - `imports.py` contains imports and common variables
-- `data/`
-  - `prepped/` directory that contains processed data
-  - `raw/` directory that contains raw data
-- `outputs/`
-  - `eda/` directory that contains EDA visualizations and files
-  - `model/` directory that contains modeling visualizations and files
-- `repo_assets/` directory that contains files used in the repo README
+```bash
+fda-food-violation-score-predictor
+├── data
+│   ├── prepped             # contains the prepped data
+│   │   └── *.csv
+│   └── raw                 # contains the raw data
+│       │                   # note: not all raw data is uploaded in this repo
+│       └── *.csv
+├── dev
+│   ├── eda.ipynb           # code used for EDA
+│   └── model.ipynb         # code used for modeling
+├── modules
+│   ├── __init__.py         # used for backend imports
+│   ├── eda.py              # helper code for EDA
+│   ├── evaluate.py         # helper code for modeling
+│   ├── helper.py           # helper code for general programming
+│   └── imports.py          # code for imports & global+default variables 
+├── outputs
+│   ├── eda_outputs         # contains EDA visualizations and files 
+│   │   └── *.csv
+│   ├── model_outputs       # contains modeling visualizations and files
+│   │   └── *.csv
+│   └── saved_models        # contains saved models
+│       └── *.pkl
+├── repo_assets
+│   ├── demo.gif            # the README's gif
+│   └── header.jpg          # the README's header image
+├── .gitignore
+├── app.py                  # the deployed app's homepage
+├── LICENSE
+├── README.md
+└── requirements.txt        # the required pip installations
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
