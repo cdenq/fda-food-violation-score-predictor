@@ -1,8 +1,10 @@
 #----------------------------------------------------
 # Imports
 #----------------------------------------------------
-from modules import imports
-from modules import helper
+import sys
+sys.path.append("../modules")
+import helper
+import imports
 
 #----------------------------------------------------
 # Helper Functions
