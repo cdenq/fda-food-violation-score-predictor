@@ -1,2 +1,313 @@
-# fda-food-violation-score-predictor
-Logistic regression model that predicts FDA food violation scores for noncompliance.
+<!-- Back to top -->
+<a name="readme-top"></a>
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="_">
+    <img src="repo_assets/header.jpg" alt="Logo" width="250" height="100">
+  </a>
+
+  <h3 align="center">FDA Noncompliance Predictor</h3>
+
+  <p align="center">
+    Logistic regression model that predicts noncompliance to 0.99 testing precision.
+    <br>
+    <br>
+    <a href="https://github.com/cdenq/">GitHub Home</a>
+    ·
+    <a href="https://github.com/cdenq/fda-food-violation-score-predictor/issues">Report Bug </a>
+    ·
+    <a href="https://github.com/cdenq/my-directory">Other Projects </a>
+  </p>
+</div>
+
+<!-- Table of Contents -->
+# Table of Contents
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#live-demo">Live Demo</a>
+    </li>
+    <li>
+      <a href="#exe-sum">Executive Summary</a>
+    </li>
+    <li>
+      <a href="#started">Getting Started</a>
+      <ul>
+        <li><a href="#started-live">Live Link</a></li>
+        <li><a href="#started-setup">Setup</a></li>
+        <li><a href="#started-directory">Directory</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#about">About The Project</a>
+      <ul>
+        <li><a href="#about-ps">Problem Statement</a></li>
+        <li><a href="#about-bw">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#process">Process</a>
+      <ul>
+        <li><a href="#process-setup">Data Sourcing, Cleaning</a></li>
+        <li><a href="#process-eda">EDA</a></li>
+        <li><a href="#process-work">Modeling</a></li>
+        <li><a href="#process-eval">Evaluation</a></li>
+      </ul>
+    </li>
+        <li>
+      <a href="#results">Results</a>
+      <ul>
+        <li><a href="#results-conclusion">Conclusions</a></li>
+        <li><a href="#results-future">Future Considerations</a></li>
+        <li><a href="#results-note">Ending Note</a></li>
+      </ul>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- DEMO -->
+<a name="live-demo"></a>
+# Live Demo
+<img src="repo_assets/fda_demo.gif">
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- Header -->
+<a name="exe-sum"></a>
+# Executive Summary
+
+In an effort to help allocate government resources more effectively, this project seeks to create a logistic regression to predict which food establishments are at risk of safety noncompliance. Specifically, this means receiving a "serious violation score", which is a inspection penalty score above 10.
+
+This project provides a starting point for predicting noncompliance, with mentions of future improvements to help refine performance. **The target optimization metric was precision.** A high precision score indicates that the model reduces the amount of false positives it makes; in context, this means that the model does not falsely penalize compliant restaurants as noncompliant.
+
+In its current state, this model achieves a **noncompliance prediction to a 98% precision** and an overall ability to **differentiate between noncompliance and compliance 82% of the time** (AUC score of 0.82). These scores are important in regulatory contexts where false positives would be extremely costly. The model also suggested that the **`average previous penalty scores` and `whether the inspection took place in Winter` had the highest impact on noncompliance predictions**. 
+
+Depending on business needs, this model can be easily retrained to optimize for other metrics, like the F1-score for example, if stakeholders prefer stronger overall performance.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ABOUT THE PROJECT -->
+<a name="started"></a>
+# Getting Started
+
+<a name="started-live"></a>
+## Live Link
+You can visit the deployed Streamlit app [here]().
+
+<a name="started-setup"></a>
+## Setup
+
+Clone repo
+```sh
+git clone https://github.com/cdenq/fda-food-violation-score-predictor
+```
+
+Setup virtual environment
+```sh
+conda create --name fda_noncompliance_predictor
+source activate fda_noncompliance_predictor
+pip install -r requirements.txt
+pip install --upgrade dataframe_image # to fix Chrome update issues
+```
+
+Navigate to streamlit folder and run app
+```sh
+cd fda-food-violation-score-predictor/code/main
+streamlit run app.py
+```
+
+NOTE: The raw data is not pushed with this repo. Please contact me for more information if you wish to deploy this model locally.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<a name="started-directory"></a>
+## Directory
+
+- `code/`
+  - `dev/`
+    - `eda.ipynb` contains the code used for EDA
+    - `model.ipynb` contains the code used for modeling
+  - `main/`
+    - `app.py` contains the code used for the front-end app
+    - `logistic_regression_model.pkl` contains the saved model
+    - `model.ipynb` contains the code used for back-end modeling
+  - `modules/`
+    - `eda.py` contains EDA visualization functions
+    - `evaluate.py` contains model evaluation functions
+    - `helper.py` contains general helper functions
+    - `imports.py` contains imports and common variables
+- `data/`
+  - `prepped/` directory that contains processed data
+  - `raw/` directory that contains raw data
+- `outputs/`
+  - `eda/` directory that contains EDA visualizations and files
+  - `model/` directory that contains modeling visualizations and files
+- `repo_assets/` directory that contains files used in the repo README
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ABOUT THE PROJECT -->
+<a name="about"></a>
+# About
+
+<a name="about-ps"></a>
+## Problem Statement
+
+The FDA is interested in efficiently allocating resources to food inspection cycles. Certain restaurants are more likely to violate health regulations than others, and thus, identifying such restaurants could help save time and money. Given raw data, this project aims to create a model to accurately predict whether a restaurant will receive a "serious violation score" (score of 10 or above), or **noncompliance**.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<a name="about-bw"></a>
+## Built With
+| **Backend** | **Database** |  **Frontend** | **Deployment**
+| - | - | - | - |
+| ![Python](https://img.shields.io/badge/Python-blue?logo=python&logoColor=white) ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-orange?logo=scikitlearn&logoColor=white) ![NLTK](https://img.shields.io/badge/NLTK-blue?logo=NLTK&logoColor=white) ![Pandas](https://img.shields.io/badge/Pandas-black?logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/NumPy-blue?logo=numpy&logoColor=white) ![Matplotlib](https://img.shields.io/badge/Matplotlib-black?logo=matplotlib&logoColor=white) ![Seaborn](https://img.shields.io/badge/Seaborn-blue?logo=seaborn&logoColor=white) | ![Local](https://img.shields.io/badge/Local-white?logo=microsoftexcel&logoColor=black) | ![Streamlit](https://img.shields.io/badge/Streamlit-crimson?logo=streamlit&logoColor=white) | ![Streamlit Community](https://img.shields.io/badge/Streamlit--Community-crimson?logo=streamlit&logoColor=white)
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ABOUT THE PROJECT -->
+<a name="process"></a>
+# Process
+
+<a name="process-setup"></a>
+## Data Collection and Cleaning
+
+Data is provided by the client. The files were checked for any formatting or value errors, but in general, they were already clean. The only major task was type-parsing, as the data types for certain fields were presented as strings but had to be parsed as lists and date-times.
+
+Feature engineering was heavily used in this process to augment the dataset. Here are the list of features that were extracted from the raw data:
+- inspection duration in days
+- inspection season
+- penalty score trend
+- percentage of non-positive reviews
+- number of cuisine labels
+- whether the cuisine was ethnic (client paramaters)
+- whether the cuisine was asian (client paramaters)
+
+Specific details are found in the `eda.ipynb` development file, located in `code/dev`. See <a href="#started-directory">Directory</a> for how to locate this file.
+
+NOTE: The raw data files were not pushed to this repo for security reasons.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<a name="process-eda"></a>
+## EDA
+
+At a high level, EDA was performed to check the data quality, repair any data deficiences, feature engineer new data, and properly format it for modeling.
+
+Outliers and multicollinearity were checked, as well, which in cases where violated, prompted specialized scaling and data engineering. 
+
+For example, the graph below shows the presence of outliers in the `inspection_duration` variable. This type of EDA prompted the use of robust scaling, which is effective at reducing outlier impact without directly removing them from the dataset.
+
+<img src="outputs/eda/boxplot_inspection_duration.png">
+
+Specific details are found in the `eda.ipynb` development file, located in `code/dev`.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<a name="process-work"></a>
+## Modeling (& Evaluation on Validation Data)
+
+Data preprocessing involved splitting the dataset into train-val-test segments, following a 75-10-15 split. Then, the training data copied into 3 instances, with each formated a different way: MinMax scalar, Standard scalar, and Robust scalar. This effectively produced three variants of the logistic regression model for which to compare. Only the numerical data was scaled; the categorical was left untouched.
+
+One benefit of the logistic regression model was its compute speed, and that leveraged in the training phase. Specifically, the model was trained using a grid-search technique with a 5-fold cross-validation to reduce overfitting. Coefficient tables, confusion matrices, classification reports, and ROC curves were generated for each of the three variants to visualize performance. From modeling, the average previous penalty scores and whether the inspection took place in the Winter season tended to have the highest impact on prediction.
+
+The performance is summarized below.
+
+<img src="outputs/model/bar_comparisons_model_comparisons.png">
+<img src="outputs/model/total_model_performance.png">
+
+From validation evaluation, the MinMax scalar-variant of the logistic model ended up performing the best on precision but slighty worse in all other metrics. Because precision was our target metric, the MinMax model was selected for testing evaluation. Worth noting, there was little difference in the effect of Standard scaling versus Robust scaling in terms of model performance.
+
+Specific details—including insights from the coefficient tables, confusion matrices, etc.—are found in the `model.ipynb` development file, located in `code/dev`.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<a name="process-eval"></a>
+## Evaluation (on Testing Data)
+
+Deploying the MinMax model onto our testing data, leads to the following results. Note: the blue and orange bars below represent the *same model*, just evaluated with different datasets.
+
+<img src="outputs/model/bar_comparisons_val_vs._test_comparison.png">
+<img src="outputs/model/final_model_performance.png">
+
+As shown in the graph above, the MinMax model scored extremely well in precision. The model also scored slightly lower in all the other metrics, which suggests that the model was overfit during the training phase.
+
+In general, this MinMax model is a great overall starting point for predicting noncompliance, as it correctly predicts noncompliance 98% of the time and overall can differentiate between noncompliant and compliant cases 82% of the time.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONCLUSIONS -->
+<a name="results"></a>
+# Results
+
+<a name="results-conclusion"></a>
+### Conclusion
+
+The logistic model serves as a signficiant improvement over the baseline format. When differentiating between noncompliance and complaince, a naive guesser would get this right 50% of the time, while the model would get this right 82% of the time (AUC score). When it comes to predicting noncompliance, a naive guesser that bases its guess on the most common class would get this right 67% of the time, while the model will correctly predict this 98% of the time (precision score).
+
+For this reason, this model would be especially effective in informing policy or noncompliance actions. 
+
+One method of deployment would be to use this model in an ensemble system, specifically as a double-checker for a another, more well-balanced model (SVM, random forest, DL NN, etc.). Given the regulatory context of this project, a false positive prediction that erronously penalizes a compliant restaurant for noncompliance would be disastrous. By having this logistic regression model quality-checking another model's prediction, we can drastically reduce the number of false positives.
+
+Another method of deployment would be to use this model "as-is". While not perfect, this model poses a general strong performance already (82% correct at differentiating between compliance and noncompliance), which could be sufficient for certain business contexts. Depending on stakeholders' needs, this model can also be quickly retrained to prioritize other metrics, like the F1-score, if a more holistic/well-rounded model is prefered over a precision-optimized model.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<a name="results-future"></a>
+### Future Considerations
+
+Below are suggested ways for future improvements to the model. 
+
+#### Augmenting Dataset:
+Including more granular data...
+- on past violations (e.g., types of violations, frequency, severity)
+- restaurant size, location
+- food suppliers, region where food was grown
+- staff training records (e.g. how much food handling training does each staff member need)
+- number of customers on daily basis
+- weight of garbage generated on daily basis
+
+This information might be obtained from health inspection records, business registration databases, or directly from establishments through surveys or compliance reporting
+
+#### Augmenting Feature Engineering & Model Training:
+- Focusing on regularization (higher penalty coefficients) would help reduce the slight overfitting problem with the model.
+- Training the model to optimize for the F1-score would ensure an overall increase in performance (but at the cost of the high precision score) 
+
+#### Augmenting Modeling Approaches:
+- Directly predicting a restaurant’s violation score, rather than a binary outcome, could provide a more nuanced view of risk, allowing for more tailored inspection approaches. For example, this project used a Log Reg model, but if predicting a numerical result, we would use a multi-linear regression (MLR) model. This approach would, in turn, could better allocate inspection resources by identifying not just whether a violation might occur, but also the likely severity of the violation. A "11" would need less of a response than a "100", despite both receiving the same violation.
+
+- Embed this model into an ensemble system that uses the results of multiple models to generate a final prediction.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<a name="results-note"></a>
+### Ending Note about AI in Social Contexts
+
+It is important to not over-rely on model predictions. An often overlooked problem with models is that we assume the ingested dataset to be perfect when this is often not the case. The dataset itself might inadvertently bias against certain types of establishments because it doesn't collect all the relevant data, potentially was collected under non-normal circumstances, or the data contains systemic bias that the model then further perpetuates. This could again lead to unfair targeting and reputational concerns for certain businesses.
+
+- E.g. High violation rates may occur due to a negligent local supplier that supplies meat to nearby restaurants (which all happen to be asian). Because tracking the source provider of meat isn't a data point, it may be the case that the model conflates being asian with the badly maintained food quality (which again, is the fault of the supplier, not the restaurant), which then results in the model predicting that universally, asian restaurants are more likelihood at risk of violation based on the strong correlation in this local case.
+
+- E.g. Inspections happened during a time when the neighboring establishment had pests, and that ended up bleeding over to the restaurant under scrutiny. Thus, this non-normal circumstance would effectively corrupt the prediction for the restaurant.
+
+- E.g. Historically, inspectors were more likely to downrate minority-owned restaurants, leading to a noticeable historical pattern in the dataset. The model would ingest this pattern and predict that minority-owned restaurants were more likely to have more violations in the future, leading to more visits to the establishment that are expecting to give poor scores, which then leads to more minority-owned restaurants getting violations, etc. This cycle would perpetuate the systemic bias against minorities.
+
+**In general, while models may provide stronger predictive powers that lead to better efficiency, we must always ensure that the models are developed transparently and ethically to ensure that the results do not come at the cost of others. Careful consideration of the results (e.g. placing them in social contexts to see if they make sense), continued iterative improvements to modeling, and diligent scrutiny of the provided dataset are critical.**
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+<a name="contact"></a>
+# Contact
+
+To directly message me or setup a time to chat virtually, see my [LinkedIn](https://www.linkedin.com/in/christopherdenq/) and [Calendly](https://calendly.com/christopherkd/coffee-chats) links.
+
+If you're curious about more projects, check out my [website](https://cdenq.github.io/) or [GitHub](https://github.com/cdenq).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>

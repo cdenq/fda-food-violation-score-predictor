@@ -1,0 +1,10 @@
+pandas
+numpy
+matplotlib
+statsmodel
+nltk
+joblib
+seaborn
+scikit-learn
+streamlit
+dataframe_image
