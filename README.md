@@ -11,7 +11,7 @@
   <h3 align="center">FDA Noncompliance Predictor</h3>
 
   <p align="center">
-    Logistic regression model that predicts noncompliance to 0.99 testing precision. Deployed <a href="https://cdenq-fda-food-violation-score-predictor-app-bimc4d.streamlit.app/">here</a>.
+    Logistic regression model that predicts noncompliance to 0.98 testing precision. Deployed <a href="https://cdenq-fda-food-violation-score-predictor-app-bimc4d.streamlit.app/">here</a>.
     <br>
     <br>
     <a href="https://github.com/cdenq/">GitHub Home</a>
