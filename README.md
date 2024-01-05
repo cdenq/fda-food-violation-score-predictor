@@ -135,7 +135,7 @@ fda-food-violation-score-predictor
 │   ├── prepped             # contains the prepped data
 │   │   └── *.csv
 │   └── raw                 # contains the raw data
-│       │                   # note: the raw data is uploaded in this repo
+│       │                   # note: the raw data is not uploaded in this repo
 │       └── *.csv
 ├── dev
 │   ├── eda.ipynb           # code used for EDA
