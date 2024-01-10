@@ -1,8 +1,8 @@
 #----------------------------------------------------
 # Imports
 #----------------------------------------------------
-import imports
-import helper
+from modules import imports
+from modules import helper
 
 #----------------------------------------------------
 # Helper Functions for EDA
