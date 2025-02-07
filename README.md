@@ -17,8 +17,6 @@
     <a href="https://github.com/cdenq/">GitHub Home</a>
     ·
     <a href="https://github.com/cdenq/fda-food-violation-score-predictor/issues">Report Bug </a>
-    ·
-    <a href="https://github.com/cdenq/my-directory">Other Projects </a>
   </p>
 </div>
 
@@ -317,8 +315,6 @@ It is important to not over-rely on ML predictions, as there are potentially ove
 <a name="contact"></a>
 # Contact
 
-To directly message me or setup a time to chat virtually, see my [LinkedIn](https://www.linkedin.com/in/christopherdenq/) and [Calendly](https://calendly.com/christopherkd/coffee-chats) links.
-
-If you're curious about more projects, check out my [website](https://cdenq.github.io/) or [GitHub](https://github.com/cdenq).
+To directly message me or setup a time to chat virtually, see my [contact page](https://github.com/cdenq#contact).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
